@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users page</title>
+    <div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<table>
+    <tr>
+        <td>NUMBER</td>
+        <td>USERNAME</td>
+        <td>ROLE</td>
+    </tr>
+    <tr th:each="user,stat : ${users}">
+        <td>
+            <span th:text="${stat.index + 1}"/>
+        </td>
+        <td>
+            <span th:text="${user.username}"/>
+        </td>
+        <td>
+            <span th:text="${user.roleName}"/>
+        </td>
+    </tr>
+</table>
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>

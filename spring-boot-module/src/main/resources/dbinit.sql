@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS item, `user`, role;
+CREATE TABLE item(id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(127), status VARCHAR(127));
+CREATE TABLE role(id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(127));
+CREATE TABLE user(id BIGINT AUTO_INCREMENT PRIMARY KEY, role_id BIGINT, username VARCHAR(127), password VARCHAR(127), CONSTRAINT role_user_id FOREIGN KEY (role_id) REFERENCES role (id));
+INSERT INTO item(name, status) VALUES('ONE ITEM', 'READY');
+INSERT INTO item(name, status) VALUES('TWO ITEM', 'STEADY');
+INSERT INTO item(name, status) VALUES('THREE ITEM', 'READY');
+INSERT INTO item(name, status) VALUES('FOUR ITEM', 'GO');
+INSERT INTO item(name, status) VALUES('FIVE ITEM', 'GO');
+INSERT INTO item(name, status) VALUES('SIX ITEM', 'STEADY');
+INSERT INTO item(name, status) VALUES('SEVEN ITEM', 'STEADY');
+INSERT INTO item(name, status) VALUES('EIGHT ITEM', 'READY');
+INSERT INTO role(name) VALUES('ADMINISTRATOR');
+INSERT INTO role(name) VALUES('CUSTOMER');
+INSERT INTO user(username, role_id, password) VALUES('user', 2, '$2a$10$v/XURvSkzAsw46IZDw4kZOgnkSbifxOY4H5KetkpvR0KYTy9ndCBy');
+INSERT INTO user(username, role_id, password) VALUES('admin', 1, '$2a$10$UiVhmq9CaV/hbtLWnJRQ9ejw.4sYO8ji2n7JQxYEdn4yQ3Qf0HRwe');

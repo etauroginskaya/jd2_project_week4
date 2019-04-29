@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <div th:fragment="header-css">
+        <link rel="stylesheet" type="text/css"
+              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <span sec:authorize="isAnonymous()">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/about}">About</a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/}">Login</a>
+            </div>
+            </span>
+            <span sec:authorize="isAuthenticated()">
+            <div class="navbar-header">
+                <a class="navbar-brand" th:href="@{/about}">About</a>
+            </div>
+            <div class="navbar-header" sec:authorize="hasAuthority('CUSTOMER')">
+                <a class="navbar-brand" th:href="@{/items.html}">Items</a>
+            </div>
+            <div class="navbar-header" sec:authorize="hasAuthority('ADMINISTRATOR')">
+                <a class="navbar-brand" th:href="@{/users.html}">Users</a>
+            </div>
+            </span>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
