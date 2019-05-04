@@ -4,10 +4,10 @@ import com.gmail.etauroginskaya.springbootmodule.week4.security.handler.AppUrlAu
 import com.gmail.etauroginskaya.springbootmodule.week4.security.handler.LoginAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +15,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
+@Order(2)
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -45,7 +46,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(accessDeniedHandler())
+                .accessDeniedHandler(loginAccessDeniedHandler())
                 .and()
                 .csrf()
                 .disable();
@@ -57,17 +58,12 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
+    public AccessDeniedHandler loginAccessDeniedHandler() {
         return new LoginAccessDeniedHandler();
     }
 
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(16);
-    }
-
-    @Bean
-    public GrantedAuthorityDefaults grantAuthorityDefaults() {
-        return new GrantedAuthorityDefaults("");
     }
 }

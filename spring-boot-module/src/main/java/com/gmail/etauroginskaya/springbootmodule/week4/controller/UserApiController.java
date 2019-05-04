@@ -26,14 +26,14 @@ public class UserApiController {
         this.userService = userService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity addUser(@RequestBody @Valid UserDTO userDTO) {
         try {
             userService.add(userDTO);
+            return new ResponseEntity(HttpStatus.CREATED);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(HttpStatus.OK);
     }
 }

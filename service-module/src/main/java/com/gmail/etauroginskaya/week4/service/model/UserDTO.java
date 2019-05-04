@@ -15,7 +15,7 @@ public class UserDTO {
     @Size(max = 60, message = "Name should not be greater than 60")
     private String password;
 
-    private RoleDTO roleDTO;
+    private RoleDTO role;
 
     public Long getId() {
         return id;
@@ -41,11 +41,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public RoleDTO getRoleDTO() {
-        return roleDTO;
+    public RoleDTO getRole() {
+        return role;
     }
 
-    public void setRoleDTO(RoleDTO roleDTO) {
-        this.roleDTO = roleDTO;
+    public void setRole(RoleDTO role) {
+        this.role = role;
     }
 }

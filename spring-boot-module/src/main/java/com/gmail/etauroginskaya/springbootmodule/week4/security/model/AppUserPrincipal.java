@@ -7,14 +7,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class AppUserPrincipal implements UserDetails {
 
     private UserDTO user;
+    private Collection<GrantedAuthority> authorities;
 
     public AppUserPrincipal(UserDTO user) {
         this.user = user;
+        authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().getName()));
     }
 
     @Override
@@ -29,8 +30,6 @@ public class AppUserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final List<GrantedAuthority> authorities = Collections.singletonList
-                (new SimpleGrantedAuthority(user.getRoleDTO().getName()));
         return authorities;
     }
 

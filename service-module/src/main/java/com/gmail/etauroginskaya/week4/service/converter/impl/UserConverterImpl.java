@@ -27,7 +27,7 @@ public class UserConverterImpl implements UserConverter {
             userDTO.setUsername(user.getUsername());
             userDTO.setPassword(user.getPassword());
             RoleDTO roleDTO = roleConverter.toDTO(user.getRole());
-            userDTO.setRoleDTO(roleDTO);
+            userDTO.setRole(roleDTO);
         }
         return userDTO;
     }
@@ -37,7 +37,7 @@ public class UserConverterImpl implements UserConverter {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
-        Role role = roleConverter.fromDTO(userDTO.getRoleDTO());
+        Role role = roleConverter.fromDTO(userDTO.getRole());
         user.setRole(role);
         return user;
     }

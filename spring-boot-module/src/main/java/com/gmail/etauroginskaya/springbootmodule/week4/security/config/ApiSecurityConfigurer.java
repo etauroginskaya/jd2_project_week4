@@ -1,12 +1,12 @@
 package com.gmail.etauroginskaya.springbootmodule.week4.security.config;
 
 import com.gmail.etauroginskaya.springbootmodule.week4.security.handler.ApiAccessDeniedHandler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,16 +14,14 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @Order(1)
-public class ApiSecurityConfigurer extends WebSecurityConfigurer {
+public class ApiSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
 
-    @Autowired
-    public ApiSecurityConfigurer(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService1) {
-        super(userDetailsService);
+    public ApiSecurityConfigurer(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
         this.passwordEncoder = passwordEncoder;
-        this.userDetailsService = userDetailsService1;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
